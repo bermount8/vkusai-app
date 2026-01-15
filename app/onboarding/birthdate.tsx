@@ -25,8 +25,8 @@ function BirthdateScreen() {
   const handleContinue = () => {
     // Save birthdate to app state/context here
     
-    // Navigate to the diet screen
-    router.push('/onboarding/diet');
+    // Navigate to the goals screen
+    router.push('/onboarding/goals');
   };
 
   return (
@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
   },
   pickerItemText: {
     fontSize: 16,
+    color: '#000',
   },
   selectedValueContainer: {
     height: 40,

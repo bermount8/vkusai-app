@@ -18,19 +18,19 @@ function WorkoutsScreen() {
     {
       id: '0-2',
       title: '0-2',
-      description: 'Workouts now and then',
+      description: 'Тренировки время от времени',
       icon: '💪'
     },
     {
       id: '3-5',
       title: '3-5',
-      description: 'A few workouts per week',
+      description: 'Несколько тренировок в неделю',
       icon: '🏋️‍♀️'
     },
     {
       id: '6+',
       title: '6+',
-      description: 'Dedicated athlete',
+      description: 'Серьёзный спортсмен',
       icon: '🏆'
     }
   ];
@@ -61,9 +61,9 @@ function WorkoutsScreen() {
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.title}>How many workouts{'\n'}do you do per week?</Text>
+        <Text style={styles.title}>Сколько тренировок{'\n'}ты делаешь в неделю?</Text>
         <Text style={styles.subtitle}>
-          This will be used to calibrate your custom plan.
+          Это будет использовано для настройки твоего индивидуального плана.
         </Text>
         
         <View style={styles.optionsContainer}>
@@ -111,7 +111,7 @@ function WorkoutsScreen() {
           onPress={handleContinue}
           disabled={!selectedOption}
         >
-          <Text style={styles.continueButtonText}>Continue</Text>
+          <Text style={styles.continueButtonText}>Продолжить</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -167,10 +167,10 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#666',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   optionsContainer: {
-    marginVertical: 24,
+    marginVertical: 32,
     gap: 16,
   },
   optionButton: {

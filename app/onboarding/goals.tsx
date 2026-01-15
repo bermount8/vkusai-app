@@ -102,7 +102,7 @@ function Goals() {
               value={calorieTarget}
               onValueChange={setCalorieTarget}
               minimumTrackTintColor="#000"
-              maximumTrackTintColor="#D1D1D6"
+              maximumTrackTintColor="#E5E5EA"
               thumbTintColor="#000"
             />
             <View style={styles.sliderLabels}>
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold' as const,
     marginBottom: 8,
+    color: '#000',
   },
   subtitle: {
     fontSize: 16,
@@ -189,14 +190,15 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   goalsContainer: {
-    marginVertical: 24,
+    marginVertical: 32,
     gap: 16,
   },
   calorieTitle: {
-    fontSize: 20,
-    fontWeight: '600' as const,
+    fontSize: 16,
+    fontWeight: '500' as const,
     marginBottom: 20,
-    marginTop: 16,
+    marginTop: 24,
+    color: '#000',
   },
   goalCard: {
     borderRadius: 12,
@@ -210,18 +212,20 @@ const styles = StyleSheet.create({
   },
   goalTitle: {
     fontSize: 18,
-    fontWeight: '600' as const,
+    fontWeight: '500' as const,
     marginBottom: 4,
+    color: '#000',
   },
   goalTitleSelected: {
     color: '#fff',
+    fontWeight: '600' as const,
   },
   goalDescription: {
     fontSize: 14,
     color: '#666',
   },
   goalDescriptionSelected: {
-    color: '#ccc',
+    color: '#fff',
   },
   calorieValue: {
     fontSize: 28,
@@ -257,7 +261,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D1D1D6',
   },
   continueButtonText: {
-    color: 'white',
+    color: '#fff',
     fontSize: 18,
     fontWeight: '600' as const,
   },

@@ -13,9 +13,9 @@ function GenderScreen() {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
   const genderOptions: GenderOption[] = [
-    { id: 'male', label: 'Male' },
-    { id: 'female', label: 'Female' },
-    { id: 'other', label: 'Other' },
+    { id: 'male', label: 'Мужчина' },
+    { id: 'female', label: 'Женщина' },
+    { id: 'other', label: 'Другое' },
   ];
 
   const handleContinue = () => {
@@ -44,14 +44,12 @@ function GenderScreen() {
           <View style={styles.progressBar} />
         </View>
         
-        <View style={styles.languageContainer}>
-          <Text style={styles.languageText}>🇺🇸 EN</Text>
-        </View>
+        
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.title}>Choose your Gender</Text>
-        <Text style={styles.subtitle}>This will be used to calibrate your custom plan.</Text>
+        <Text style={styles.title}>Выберите пол</Text>
+        <Text style={styles.subtitle}>Это будет использовано для настройки вашего плана.</Text>
         
         <View style={styles.optionsContainer}>
           {genderOptions.map((option) => (
@@ -83,7 +81,7 @@ function GenderScreen() {
           onPress={handleContinue}
           disabled={!selectedGender}
         >
-          <Text style={styles.continueButtonText}>Continue</Text>
+          <Text style={styles.continueButtonText}>Продолжить</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -139,10 +137,10 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#666',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   optionsContainer: {
-    marginVertical: 24,
+    marginVertical: 32,
     gap: 16,
   },
   optionButton: {

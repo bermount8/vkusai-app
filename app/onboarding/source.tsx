@@ -4,43 +4,63 @@ import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-interface DietOption {
+interface SourceOption {
   id: string;
   title: string;
   icon: string;
 }
 
-function DietScreen() {
-  const [selectedDiet, setSelectedDiet] = useState<string | null>(null);
+function SourceScreen() {
+  const [selectedSource, setSelectedSource] = useState<string | null>(null);
 
-  const dietOptions: DietOption[] = [
+  const sourceOptions: SourceOption[] = [
     {
-      id: 'classic',
-      title: 'Classic',
-      icon: '🍗'
+      id: 'appstore',
+      title: 'App Store',
+      icon: '🍎'
     },
     {
-      id: 'pescatarian',
-      title: 'Pescatarian',
-      icon: '🐟'
+      id: 'tiktok',
+      title: 'TikTok',
+      icon: '🎵'
     },
     {
-      id: 'vegetarian',
-      title: 'Vegetarian',
-      icon: '🥦'
+      id: 'youtube',
+      title: 'YouTube',
+      icon: '📺'
     },
     {
-      id: 'vegan',
-      title: 'Vegan',
-      icon: '🌱'
+      id: 'tv',
+      title: 'TV',
+      icon: '📺'
+    },
+    {
+      id: 'x',
+      title: 'X',
+      icon: '🐦'
+    },
+    {
+      id: 'instagram',
+      title: 'Instagram',
+      icon: '📷'
+    },
+    {
+      id: 'google',
+      title: 'Google',
+      icon: '🔍'
+    },
+    {
+      id: 'facebook',
+      title: 'Facebook',
+      icon: '📘'
     }
   ];
 
   const handleContinue = () => {
-    if (!selectedDiet) return;
+    if (!selectedSource) return;
     
     // Navigate to the next screen
-    router.push('/onboarding/goals');
+    router.push('/onboarding/gender');
   };
 
   return (
@@ -53,7 +73,7 @@ function DietScreen() {
         </TouchableOpacity>
         
         <View style={styles.progressContainer}>
-          <View style={[styles.progressBar, { width: '65%' }]} />
+          <View style={[styles.progressBar, { width: '10%' }]} />
         </View>
         
         <View style={styles.languageContainer}>
@@ -62,24 +82,24 @@ function DietScreen() {
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.title}>Do you follow a specific diet?</Text>
+        <Text style={styles.title}>Where did you hear about us?</Text>
         
-        <View style={styles.dietOptionsContainer}>
-          {dietOptions.map((diet) => (
+        <View style={styles.optionsContainer}>
+          {sourceOptions.map((source) => (
             <TouchableOpacity
-              key={diet.id}
+              key={source.id}
               style={[
-                styles.dietOption,
-                selectedDiet === diet.id && styles.dietOptionSelected
+                styles.optionButton,
+                selectedSource === source.id && styles.selectedOptionButton
               ]}
-              onPress={() => setSelectedDiet(diet.id)}
+              onPress={() => setSelectedSource(source.id)}
             >
-              <Text style={styles.dietIcon}>{diet.icon}</Text>
+              <Text style={styles.optionIcon}>{source.icon}</Text>
               <Text style={[
-                styles.dietTitle,
-                selectedDiet === diet.id && styles.dietTitleSelected
+                styles.optionTitle,
+                selectedSource === source.id && styles.selectedOptionText
               ]}>
-                {diet.title}
+                {source.title}
               </Text>
             </TouchableOpacity>
           ))}
@@ -88,17 +108,13 @@ function DietScreen() {
         <TouchableOpacity 
           style={[
             styles.continueButton,
-            selectedDiet ? styles.continueButtonActive : styles.continueButtonInactive
+            selectedSource ? styles.continueButtonActive : styles.continueButtonInactive
           ]}
           onPress={handleContinue}
-          disabled={!selectedDiet}
+          disabled={!selectedSource}
         >
           <Text style={styles.continueButtonText}>Continue</Text>
         </TouchableOpacity>
-        
-        <View style={styles.paginationDots}>
-          <View style={styles.paginationDot} />
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -147,34 +163,33 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold' as const,
-    marginBottom: 40,
+    marginBottom: 8,
+    color: '#000',
   },
-  dietOptionsContainer: {
+  optionsContainer: {
+    marginVertical: 32,
     gap: 16,
-    marginBottom: 'auto',
   },
-  dietOption: {
-    flexDirection: 'row' as const,
-    alignItems: 'center' as const,
+  optionButton: {
     backgroundColor: '#F5F5F7',
     borderRadius: 12,
     padding: 20,
+    alignItems: 'center' as const,
   },
-  dietOptionSelected: {
-    backgroundColor: '#F5F5F7',
-    borderWidth: 2,
-    borderColor: '#000',
+  selectedOptionButton: {
+    backgroundColor: '#000',
   },
-  dietIcon: {
-    fontSize: 24,
+  optionIcon: {
+    fontSize: 28,
     marginRight: 16,
   },
-  dietTitle: {
+  optionTitle: {
     fontSize: 18,
     fontWeight: '500' as const,
+    color: '#000',
   },
-  dietTitleSelected: {
-    fontWeight: '600' as const,
+  selectedOptionText: {
+    color: '#fff',
   },
   continueButton: {
     borderRadius: 30,
@@ -194,17 +209,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600' as const,
   },
-  paginationDots: {
-    flexDirection: 'row' as const,
-    justifyContent: 'center' as const,
-    marginTop: 16,
-  },
-  paginationDot: {
-    width: 40,
-    height: 4,
-    backgroundColor: '#000',
-    borderRadius: 2,
-  },
 });
 
-export default DietScreen;
+export default SourceScreen;
