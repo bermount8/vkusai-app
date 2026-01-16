@@ -39,7 +39,7 @@ function WorkoutsScreen() {
     if (!selectedOption) return;
     
     // Navigate to the next screen
-    router.push('/onboarding/measurements');
+    router.push('/onboarding/source');
   };
 
   return (

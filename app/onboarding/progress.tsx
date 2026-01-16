@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { DateWheelPicker } from '../components/DateWheelPicker';
+import { ProgressChart } from '../components/ProgressChart';
 
-function BirthdateScreen() {
-  const [selectedDay, setSelectedDay] = useState<number>(1);
-  const [selectedMonth, setSelectedMonth] = useState<number>(1);
-  const [selectedYear, setSelectedYear] = useState<number>(2000);
-
-  const handleDateChange = (day: number, month: number, year: number) => {
-    setSelectedDay(day);
-    setSelectedMonth(month);
-    setSelectedYear(year);
-  };
-
+function ProgressScreen() {
   const handleContinue = () => {
-    // Save birthdate to app state/context here
-    
-    // Navigate to the goals screen
-    router.push('/onboarding/goals');
+    // Navigate to the next screen (measurements)
+    router.push('/onboarding/measurements');
   };
 
   return (
@@ -28,30 +16,26 @@ function BirthdateScreen() {
       <StatusBar style="dark" />
       
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <TouchableOpacity style={styles.backButton}>
           <Text style={styles.backButtonText}>←</Text>
         </TouchableOpacity>
-        
-        <View style={styles.progressContainer}>
-          <View style={styles.progressBar} />
-        </View>
-        
-        <View style={styles.languageContainer}>
-          <Text style={styles.languageText}>🇺🇸 EN</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: '85%' }]} />
         </View>
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.title}>When were you born?</Text>
+        <Text style={styles.title}>Your progress</Text>
         <Text style={styles.subtitle}>
-          This will be used to calibrate your custom plan.
+          Here's how you're tracking with your goals.
         </Text>
-        <DateWheelPicker
-          initialDay={selectedDay}
-          initialMonth={selectedMonth}
-          initialYear={selectedYear}
-          onDateChange={handleDateChange}
-        />
+        
+        <View style={styles.chartContainer}>
+          <ProgressChart
+            aiData={[80, 79.4, 78.9, 78.3, 77.8, 77.2]}
+            traditionalData={[80, 79, 79.5, 78.8, 79.2, 78.9]}
+          />
+        </View>
         
         <TouchableOpacity 
           style={styles.continueButton}
@@ -82,15 +66,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '300' as const,
   },
-  progressContainer: {
+  progressBar: {
     flex: 1,
     height: 4,
     backgroundColor: '#E5E5EA',
     borderRadius: 2,
     marginHorizontal: 16,
   },
-  progressBar: {
-    width: '60%',
+  progressFill: {
     height: '100%',
     backgroundColor: '#000',
     borderRadius: 2,
@@ -113,7 +96,10 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#666',
-    marginBottom: 24,
+    marginBottom: 32,
+  },
+  chartContainer: {
+    marginVertical: 32,
   },
   continueButton: {
     backgroundColor: '#000',
@@ -130,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BirthdateScreen;
+export default ProgressScreen;

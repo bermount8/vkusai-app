@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MeasurementWheelPicker } from '../components/MeasurementWheelPicker';
 
 function MeasurementsScreen() {
   const [selectedHeight, setSelectedHeight] = useState<number>(170);
   const [selectedWeight, setSelectedWeight] = useState<number>(70);
-  // Using only metric units
 
-  // Generate height options (cm) centered around 170cm
-  const heightOptions = Array.from({ length: 100 }, (_, i) => 120 + i); // 120cm to 219cm
+  // Generate height options: 140-220 cm
+  const heightOptions = Array.from({ length: 81 }, (_, i) => 140 + i);
   
-  // Generate weight options (kg) centered around 70kg
-  const weightOptions = Array.from({ length: 150 }, (_, i) => 30 + i); // 30kg to 179kg
+  // Generate weight options: 40-150 kg
+  const weightOptions = Array.from({ length: 111 }, (_, i) => 40 + i);
 
   const handleContinue = () => {
     // Save measurements to app state/context here
@@ -51,54 +51,22 @@ function MeasurementsScreen() {
         <View style={styles.measurementsContainer}>
           <View style={styles.measurementColumn}>
             <Text style={styles.measurementTitle}>Height</Text>
-            <View style={styles.pickerWrapper}>
-              <Text style={styles.pickerAboveValue}>{selectedHeight > heightOptions[0] ? selectedHeight - 1 : ''} cm</Text>
-              <View style={styles.selectedValueContainer}>
-                <Text style={styles.selectedValue}>{selectedHeight} cm</Text>
-              </View>
-              <Text style={styles.pickerBelowValue}>{selectedHeight < heightOptions[heightOptions.length - 1] ? selectedHeight + 1 : ''} cm</Text>
-              <ScrollView 
-                style={styles.pickerScrollView} 
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.pickerScrollContent}
-              >
-                {heightOptions.map((height) => (
-                  <TouchableOpacity
-                    key={`height-${height}`}
-                    style={styles.pickerItem}
-                    onPress={() => setSelectedHeight(height)}
-                  >
-                    <Text style={styles.pickerItemText}>{height} cm</Text>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </View>
+            <MeasurementWheelPicker
+              values={heightOptions}
+              unit="cm"
+              initialValue={selectedHeight}
+              onValueChange={setSelectedHeight}
+            />
           </View>
           
           <View style={styles.measurementColumn}>
             <Text style={styles.measurementTitle}>Weight</Text>
-            <View style={styles.pickerWrapper}>
-              <Text style={styles.pickerAboveValue}>{selectedWeight > weightOptions[0] ? selectedWeight - 1 : ''} kg</Text>
-              <View style={styles.selectedValueContainer}>
-                <Text style={styles.selectedValue}>{selectedWeight} kg</Text>
-              </View>
-              <Text style={styles.pickerBelowValue}>{selectedWeight < weightOptions[weightOptions.length - 1] ? selectedWeight + 1 : ''} kg</Text>
-              <ScrollView 
-                style={styles.pickerScrollView} 
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.pickerScrollContent}
-              >
-                {weightOptions.map((weight) => (
-                  <TouchableOpacity
-                    key={`weight-${weight}`}
-                    style={styles.pickerItem}
-                    onPress={() => setSelectedWeight(weight)}
-                  >
-                    <Text style={styles.pickerItemText}>{weight} kg</Text>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </View>
+            <MeasurementWheelPicker
+              values={weightOptions}
+              unit="kg"
+              initialValue={selectedWeight}
+              onValueChange={setSelectedWeight}
+            />
           </View>
         </View>
         
@@ -162,13 +130,14 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#666',
-    marginBottom: 32,
+    marginBottom: 24,
   },
-  // Removed unit switch styles
   measurementsContainer: {
     flexDirection: 'row' as const,
     justifyContent: 'space-between' as const,
-    marginBottom: 32,
+    marginBottom: 48,
+    paddingHorizontal: 32,
+    marginTop: 20,
   },
   measurementColumn: {
     flex: 1,
@@ -177,59 +146,9 @@ const styles = StyleSheet.create({
   measurementTitle: {
     fontSize: 16,
     fontWeight: '500' as const,
-    marginBottom: 16,
-  },
-  pickerWrapper: {
-    height: 120,
-    width: '80%',
-    position: 'relative' as const,
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    backgroundColor: '#F5F5F7',
-    borderRadius: 12,
-    padding: 16,
-    overflow: 'hidden' as const, // Ensure content doesn't spill out
-  },
-  pickerScrollView: {
-    position: 'absolute' as const,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 0.01, // Very slight opacity to make it interactive but virtually invisible
-    zIndex: 10, // Ensure it's on top to receive touch events
-  },
-  pickerScrollContent: {
-    paddingVertical: 100,
-  },
-  pickerItem: {
-    height: 40,
-    justifyContent: 'center' as const,
-    alignItems: 'center' as const,
-  },
-  pickerItemText: {
-    fontSize: 16,
-  },
-  selectedValueContainer: {
-    height: 40,
-    justifyContent: 'center' as const,
-    alignItems: 'center' as const,
-    width: '100%',
-  },
-  selectedValue: {
-    fontSize: 18,
-    fontWeight: 'bold' as const,
+    marginBottom: 20,
     color: '#000',
-  },
-  pickerAboveValue: {
-    fontSize: 16,
-    color: '#999',
-    marginBottom: 4,
-  },
-  pickerBelowValue: {
-    fontSize: 16,
-    color: '#999',
-    marginTop: 4,
+    minHeight: 18,
   },
   continueButton: {
     backgroundColor: '#000',
@@ -237,7 +156,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: 'center' as const,
     marginTop: 'auto',
-    marginBottom: 16,
+    marginBottom: 24,
   },
   continueButtonText: {
     color: '#fff',

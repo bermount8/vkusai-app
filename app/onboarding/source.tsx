@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -59,8 +59,8 @@ function SourceScreen() {
   const handleContinue = () => {
     if (!selectedSource) return;
     
-    // Navigate to the next screen
-    router.push('/onboarding/gender');
+    // Navigate to the progress screen
+    router.push('/onboarding/progress');
   };
 
   return (
@@ -73,7 +73,7 @@ function SourceScreen() {
         </TouchableOpacity>
         
         <View style={styles.progressContainer}>
-          <View style={[styles.progressBar, { width: '10%' }]} />
+          <View style={[styles.progressBar, { width: '85%' }]} />
         </View>
         
         <View style={styles.languageContainer}>
@@ -84,26 +84,28 @@ function SourceScreen() {
       <View style={styles.content}>
         <Text style={styles.title}>Where did you hear about us?</Text>
         
-        <View style={styles.optionsContainer}>
-          {sourceOptions.map((source) => (
-            <TouchableOpacity
-              key={source.id}
-              style={[
-                styles.optionButton,
-                selectedSource === source.id && styles.selectedOptionButton
-              ]}
-              onPress={() => setSelectedSource(source.id)}
-            >
-              <Text style={styles.optionIcon}>{source.icon}</Text>
-              <Text style={[
-                styles.optionTitle,
-                selectedSource === source.id && styles.selectedOptionText
-              ]}>
-                {source.title}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
+          <View style={styles.optionsContainer}>
+            {sourceOptions.map((source) => (
+              <TouchableOpacity
+                key={source.id}
+                style={[
+                  styles.optionButton,
+                  selectedSource === source.id && styles.selectedOptionButton
+                ]}
+                onPress={() => setSelectedSource(source.id)}
+              >
+                <Text style={styles.optionIcon}>{source.icon}</Text>
+                <Text style={[
+                  styles.optionTitle,
+                  selectedSource === source.id && styles.selectedOptionText
+                ]}>
+                  {source.title}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
         
         <TouchableOpacity 
           style={[
@@ -159,6 +161,9 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 24,
+  },
+  scrollView: {
+    flex: 1,
   },
   title: {
     fontSize: 32,
