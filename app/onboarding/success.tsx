@@ -1,63 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Animated, { FadeOut } from 'react-native-reanimated';
 import { router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-function SuccessScreen() {
+export default function Success() {
   const handleContinue = () => {
-    // Navigate to the main app
-    router.replace('/(app)');
+    setTimeout(() => {
+      router.replace('/(app)');
+    }, 200);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      
+    <Animated.View 
+      style={styles.container}
+      exiting={FadeOut.duration(250)}
+    >
       <View style={styles.content}>
-        <View style={styles.successIconContainer}>
-          <Text style={styles.successIcon}>✓</Text>
+        <View style={styles.successIcon}>
+          <Text style={styles.icon}>✓</Text>
         </View>
         
         <Text style={styles.title}>You're all set!</Text>
         <Text style={styles.subtitle}>
-          Your personalized calorie tracking plan is ready. Start tracking your meals and reach your goals!
+          Your personalized plan is ready
         </Text>
         
-        <View style={styles.featuresContainer}>
-          <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>📸</Text>
-            <View style={styles.featureTextContainer}>
-              <Text style={styles.featureTitle}>Snap meals</Text>
-              <Text style={styles.featureDescription}>Take a photo of your meal for instant calorie tracking</Text>
-            </View>
-          </View>
-          
-          <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>📊</Text>
-            <View style={styles.featureTextContainer}>
-              <Text style={styles.featureTitle}>Track progress</Text>
-              <Text style={styles.featureDescription}>Monitor your daily calorie intake and macronutrients</Text>
-            </View>
-          </View>
-          
-          <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>🎯</Text>
-            <View style={styles.featureTextContainer}>
-              <Text style={styles.featureTitle}>Reach goals</Text>
-              <Text style={styles.featureDescription}>Stay on track with personalized recommendations</Text>
-            </View>
-          </View>
-        </View>
-        
         <TouchableOpacity 
-          style={styles.continueButton}
+          style={styles.button}
           onPress={handleContinue}
         >
-          <Text style={styles.continueButtonText}>Get Started</Text>
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </Animated.View>
   );
 }
 
@@ -68,11 +43,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 24,
   },
-  successIconContainer: {
+  successIcon: {
     width: 80,
     height: 80,
     borderRadius: 40,
@@ -81,64 +56,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 24,
   },
-  successIcon: {
+  icon: {
     color: '#fff',
     fontSize: 40,
     fontWeight: 'bold',
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
-    marginBottom: 40,
-    lineHeight: 22,
+    marginBottom: 32,
   },
-  featuresContainer: {
-    width: '100%',
-    marginBottom: 40,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  featureIcon: {
-    fontSize: 32,
-    marginRight: 16,
-  },
-  featureTextContainer: {
-    flex: 1,
-  },
-  featureTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  featureDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-  },
-  continueButton: {
+  button: {
     backgroundColor: '#000',
-    borderRadius: 30,
+    borderRadius: 28,
     paddingVertical: 16,
     paddingHorizontal: 32,
     alignItems: 'center',
-    width: '100%',
-    marginTop: 'auto',
   },
-  continueButtonText: {
+  buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '600',
   },
 });
-
-export default SuccessScreen;

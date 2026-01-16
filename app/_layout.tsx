@@ -60,6 +60,15 @@ function RootLayout({}: RootLayoutProps) {
             }}
           />
           <Stack.Screen
+            name="onboarding/success"
+            options={{
+              title: 'Success',
+              headerShown: false,
+              headerBackVisible: false,
+              gestureEnabled: false,
+            }}
+          />
+          <Stack.Screen
             name="(app)"
             options={{
               headerShown: false,

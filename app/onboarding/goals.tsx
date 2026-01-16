@@ -40,9 +40,9 @@ function Goals() {
     setIsLoading(true);
     
     // TODO: Save user preferences to Supabase
-    // For now, navigate to the subscription screen
+    // For now, navigate to motivation board
     setTimeout(() => {
-      router.push('/onboarding/subscription');
+      router.push('/onboarding/motivation-board');
     }, 1000);
   };
 
