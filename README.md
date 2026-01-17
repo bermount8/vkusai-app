@@ -12,6 +12,3 @@ AI-powered calorie tracking mobile app built with Expo and React Native.
 ## Status
 🚧 In active development
 
-ostrov epshteina glavar erkesh teper noviy glovar dimash
-EBAAAAAT SHTO? Da vnature TI GAY 
-Gupka bob huesos
